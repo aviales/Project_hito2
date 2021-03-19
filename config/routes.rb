@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   get "tweets/search"
-  resources :tweets do 
+
+    devise_for :admin_users, ActiveAdmin::Devise.config
+    ActiveAdmin.routes(self)
+    resources :tweets do
+      resources :likes
     
     resources :likes
     member do 
@@ -9,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+
   devise_for :users
   root 'tweets#index'
 end
+
